@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# To generate Swift Protocol Buffer and gRPC sources, we’ll use the Swift gRPC Docker image. The benefit of using Docker to generate the sources is that we don’t have to install any of the dependencies on our machines. We just take advantage of an image that is already configured for us, and it’s also easier to clean once we’re done with it.
+
+
+(
+  # Navigate to Protos directory
+  cd Sources/Protos &&
+    # Generate the swift files using docker
+    exec docker run -i -t -v `pwd`:/working_dir -w /working_dir \
+      sergiocampama/swift_grpc \
+      protoc --swift_out=. --swiftgrpc_out=. \
+      echo.proto
+) && (
+  # Copy swift files to EchoServer
+  cp Sources/Protos/*.swift Sources/EchoServer
+) && (
+  # Copy swift files to EchoClient
+  cp Sources/Protos/*.swift Sources/EchoClient
+)
+
