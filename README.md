@@ -21,3 +21,9 @@ Run `swift run EchoClient`
 Run `bin/build-linux-release`.
 
 You will get a image that you can run or upload using docker.
+
+You can try the latest build using
+
+```bash
+docker run -t -i -p "3000:3000" ross/echoserver:latest
+```
