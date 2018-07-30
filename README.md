@@ -15,3 +15,9 @@ Run `swift run EchoServer`
 ## Send request
 
 Run `swift run EchoClient`
+
+## Build release version of EchoServer for Linux
+
+Run `bin/build-linux-release`.
+
+You will get a image that you can run or upload using docker.

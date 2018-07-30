@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# swiftdocker/swift is an ubuntu based image with the swift toolchain already installed.
+#
+# The command below should generate a Linux binary at
+# Echo/.release/x86_64-unknown-linux/release/EchoServer
+docker run -i -t -v `pwd`:/working_dir -w /working_dir \
+    swiftdocker/swift:4.1 \
+    swift build --product EchoServer \
+    --build-path .release \
+    --configuration release
+
+# Build a release image that can be uploaded to any docker repository
+docker build -t $USER/echoserver .
+
+echo "A docker file is built and is tagged $USER/echoserver"
